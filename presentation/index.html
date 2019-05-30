@@ -1,0 +1,62 @@
+<html ng-app="Products">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container" ng-controller="productController">
+    <div align="center">
+      <h3>PRODUCTOS</h3>
+      <form name="add_form" ng-submit="add(product)" novalidate>
+        <div class="row">
+          <span>Nombre: </span>
+          <input class="form-control" type="text" required="required" ng-model="product.name">
+        </div>
+        <br>
+        <div class="row">
+            <span>Peso: </span>
+          <input class="form-control" type="number" required="required" ng-model="product.weight">
+        </div>
+        <br>
+        <div class="row">
+            <span>Precio: </span>
+          <input class="form-control" type="number" required="required" ng-model="product.price">
+        </div>
+        <br>
+        <div class="row">
+          <input class="btn btn-info" type="submit" ng-disabled="!add_form.$valid" ng-if="!product.code">
+          <div class="btn-group">
+            <button class="btn btn-info" ng-click="update(product)" ng-if="product.code" type="submit">Update</button>
+            <button class="btn" ng-click="deselect()" ng-if="product.code">Clear</button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="product in products">
+          <td>{{product.name}}</td>
+          <td><button class="btn btn-warning" ng-click="edit(product.code)">Edit</button></td>
+          <td><button class="btn btn-danger" ng-click="remove(product)">Remove</button></td>
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
+
+  <script src="js/angular.min.js"></script>
+  <script src="js/angular-resource.min.js"></script>
+  <script src="app/app.js"></script>
+</body>
+
+</html>
